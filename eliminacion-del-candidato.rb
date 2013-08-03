@@ -16,7 +16,7 @@ class EliminacionDelCandidato
     especificas = [Hipotesis.new(["0","0","0","0","0","0"])]
 
     @atributos.each do |atributo|
-      atributo.instancias.push "?", "0"
+      atributo.instancias.push "?"
     end
     
     # Construir espacio de versiones (Todas las combinaciones entre instancias de atributos)
@@ -42,8 +42,9 @@ class EliminacionDelCandidato
           espacio_versiones.each do |h|
             consistente = true
             0.upto(i) do |j|
-              if @ejemplos[j].clasificacion == true and !h.consistente(@ejemplos[j])
+              if !h.consistente(@ejemplos[j])
                 consistente = false
+                break
               end            
             end
 
@@ -61,8 +62,9 @@ class EliminacionDelCandidato
           espacio_versiones.each do |h|
             consistente = true
             0.upto(i) do |j|
-              if @ejemplos[j].clasificacion == false and !h.consistente(@ejemplos[j])
+              if !h.consistente(@ejemplos[j])
                 consistente = false
+                break
               end            
             end
 
